@@ -373,11 +373,11 @@ function renderTemplates() {
   document.getElementById('tpl-list').innerHTML = TPL.map(function(t){
     var sel = state.selected.indexOf(t.id) >= 0;
     var isQ = t.id===7 || t.id===8;
-    return '<div class="tpl-item'+(sel?' selected':'')+'" onclick="toggleTpl('+t.id+')" style="'+(isQ?'opacity:0.85':'')+'">'+
-      '<div style="display:flex;align-items:flex-start;gap:8px">'+
-      '<span style="font-size:18px">'+t.icon+'</span>'+
-      '<div><div class="name">#'+t.id+' '+t.short+(isQ?' <span style="font-size:10px;padding:2px 6px;border-radius:4px;background:rgba(6,214,160,0.1);color:#06D6A0">推荐</span>':'')+'</div>'+
-      '<div class="desc">'+t.desc+'</div>'+
+    return '<div class="tpl-item card card-sm'+(sel?' selected':'')+'" onclick="toggleTpl('+t.id+')" style="'+(isQ?'opacity:0.85':'')+'">'+
+      '<div class="tpl-header" style="display:flex;align-items:flex-start;gap:8px">'+
+      '<span class="tpl-icon" style="font-size:18px">'+t.icon+'</span>'+
+      '<div style="flex:1;min-width:0"><div class="tpl-name">#'+t.id+' '+t.short+(isQ?' <span class="tpl-tag rec">推荐</span>':'')+'</div>'+
+      '<div class="tpl-desc">'+t.desc+'</div>'+
       (sel?'<div style="margin-top:6px;font-size:10px;color:rgba(124,58,237,0.7)">'+t.boosters.length+'个增强词</div>':'')+
       '</div></div></div>';
   }).join('');

@@ -217,7 +217,7 @@ body {
 <div>
 <div class="card" style="margin-bottom:12px">
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><span style="font-size:13px;font-weight:600">📋 模板选择</span><div><button class="btn btn-xs btn-outline" onclick="selectAllTpl()">全选</button><button class="btn btn-xs btn-outline" onclick="deselectAllTpl()">取消</button></div></div>
-<div id="tpl-list"></div>
+<div id="tpl-list" style="display:flex;flex-direction:column;gap:8px"></div>
 </div>
 <div class="card card-sm" style="margin-bottom:12px"><div style="font-size:11px;color:var(--text2);margin-bottom:8px">🎨 风格预设</div><div class="style-tags" id="style-tags"></div></div>
 <div class="card card-sm"><div style="font-size:11px;color:var(--text2);margin-bottom:8px">📐 宽高比</div><div class="ratio-tags" id="ratio-tags"></div></div>
@@ -235,7 +235,6 @@ body {
 <div id="prompt-area"></div>
 <div style="display:flex;gap:6px;margin-top:10px"><button class="btn btn-sm btn-outline" onclick="copyPrompt()">📋 复制提示词</button><button class="btn btn-sm btn-outline" onclick="clearPrompt()">🗑️ 清空</button><button class="btn btn-sm btn-outline" onclick="savePrompt()">💾 保存</button><span id="prompt-chars" style="font-size:11px;color:var(--text3);margin-left:auto;align-self:center"></span></div>
 </div>
-<div class="card"><div style="font-size:12px;color:var(--text3);line-height:2">💡 <b>使用提示：</b><br>1️⃣ 先选品类 → 再选型号<br>2️⃣ 选场景 → 点「生成提示词」<br>3️⃣ 在框中直接编辑修改<br>4️⃣ 点「📋 复制」即可使用</div></div>
 </div>
 </div></div>
 
@@ -243,16 +242,14 @@ body {
 
 <div class="page" id="page-guide"><div class="guide-container"><div class="guide-title"><h1 style="font-size:28px"><span class="gradient" style="background:linear-gradient(135deg,var(--violet2),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent">快速使用指南</span></h1><p style="color:var(--text3);margin-top:8px">四步上手，轻松生成专业级8K图片</p></div>
 <div class="guide-steps">
-<div class="guide-step"><div class="step-num">1</div><h3>选择提示词模板</h3><p style="font-size:13px;color:var(--text2);margin-top:8px">8套专业模板覆盖万能通用、写实、幻想、肖像等全场景。建议选1个内容模板+模板7+模板8。</p></div>
-<div class="guide-step"><div class="step-num">2</div><h3>填写创作变量</h3><p style="font-size:13px;color:var(--text2);margin-top:8px">填写主体、服装、场景、情绪等变量。主体描述越详细效果越好。</p></div>
-<div class="guide-step"><div class="step-num">3</div><h3>优化提示词</h3><p style="font-size:13px;color:var(--text2);margin-top:8px">一键优化自动叠加8K分辨率、电影级光影等高权重增强词。</p></div>
+<div class="guide-step"><div class="step-num">1</div><h3>选择提示词模板</h3><p style="font-size:13px;color:var(--text2);margin-top:8px">8套专业模板覆盖万能通用、写实、幻想、肖像等全场景。</p></div>
+<div class="guide-step"><div class="step-num">2</div><h3>填写创作变量</h3><p style="font-size:13px;color:var(--text2);margin-top:8px">填写主体、服装、场景、情绪等变量。</p></div>
+<div class="guide-step"><div class="step-num">3</div><h3>优化提示词</h3><p style="font-size:13px;color:var(--text2);margin-top:8px">一键优化自动叠加8K分辨率等高权重增强词。</p></div>
 <div class="guide-step"><div class="step-num">4</div><h3>生成8K图片</h3><p style="font-size:13px;color:var(--text2);margin-top:8px">通过AI模型生成图片，可直接下载PNG原图。</p></div>
 </div>
-<div style="text-align:center;padding:40px"><button class="btn btn-gradient" onclick="showPage('create')" style="padding:12px 32px;font-size:16px">✨ 立即开始创作</button></div>
-</div></div>
+<div style="text-align:center;padding:40px"><button class="btn btn-gradient" onclick="showPage('create')" style="padding:12px 32px;font-size:16px">✨ 立即开始创作</button></div></div></div>
 
 <footer class="footer">海一云商集团 · 图片提示词大师 · Powered by AI</footer>
-
 <script>// 海一云商集团 - 图片提示词大师（产品细化版）
 // ===== 产品细化数据库 =====
 var PRODUCT_CATEGORIES = [
@@ -628,11 +625,11 @@ function renderTemplates() {
   document.getElementById('tpl-list').innerHTML = TPL.map(function(t){
     var sel = state.selected.indexOf(t.id) >= 0;
     var isQ = t.id===7 || t.id===8;
-    return '<div class="tpl-item'+(sel?' selected':'')+'" onclick="toggleTpl('+t.id+')" style="'+(isQ?'opacity:0.85':'')+'">'+
-      '<div style="display:flex;align-items:flex-start;gap:8px">'+
-      '<span style="font-size:18px">'+t.icon+'</span>'+
-      '<div><div class="name">#'+t.id+' '+t.short+(isQ?' <span style="font-size:10px;padding:2px 6px;border-radius:4px;background:rgba(6,214,160,0.1);color:#06D6A0">推荐</span>':'')+'</div>'+
-      '<div class="desc">'+t.desc+'</div>'+
+    return '<div class="tpl-item card card-sm'+(sel?' selected':'')+'" onclick="toggleTpl('+t.id+')" style="'+(isQ?'opacity:0.85':'')+'">'+
+      '<div class="tpl-header" style="display:flex;align-items:flex-start;gap:8px">'+
+      '<span class="tpl-icon" style="font-size:18px">'+t.icon+'</span>'+
+      '<div style="flex:1;min-width:0"><div class="tpl-name">#'+t.id+' '+t.short+(isQ?' <span class="tpl-tag rec">推荐</span>':'')+'</div>'+
+      '<div class="tpl-desc">'+t.desc+'</div>'+
       (sel?'<div style="margin-top:6px;font-size:10px;color:rgba(124,58,237,0.7)">'+t.boosters.length+'个增强词</div>':'')+
       '</div></div></div>';
   }).join('');
@@ -825,4 +822,5 @@ function showToast(msg) {
   renderGallery();
 })();
 </script>
-</body></html>
+</body>
+</html>
