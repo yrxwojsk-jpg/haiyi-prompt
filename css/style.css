@@ -82,7 +82,8 @@ body {
 .create-left, .create-mid, .create-right { display:flex; flex-direction:column; gap:12px; }
 
 /* === TEMPLATE CARDS === */
-.tpl-item { cursor:pointer; }
+.tpl-item { cursor:pointer; background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:12px; margin-bottom:8px; transition:all 0.25s; }
+.tpl-item:hover { border-color:rgba(124,58,237,0.3); }
 .tpl-item.selected { border-color:var(--violet2); background:rgba(124,58,237,0.08); box-shadow:0 0 20px rgba(124,58,237,0.1); }
 .tpl-item .tpl-header { display:flex; align-items:flex-start; gap:8px; }
 .tpl-item .tpl-icon { font-size:18px; flex-shrink:0; }
@@ -113,9 +114,12 @@ body {
 .ratio-tag.active { background:rgba(124,58,237,0.12); border-color:rgba(124,58,237,0.3); color:var(--violet2); }
 
 /* === PROMPT PREVIEW === */
-.prompt-box { background:rgba(0,0,0,0.3); border:1px solid var(--border); border-radius:10px; padding:14px; min-height:160px; max-height:320px; overflow-y:auto; font-size:13px; color:var(--text2); white-space:pre-wrap; line-height:1.8; font-family:inherit; }
-.prompt-box.empty { display:flex; align-items:center; justify-content:center; color:var(--text3); font-size:13px; }
+.prompt-box { background:rgba(0,0,0,0.3); border:1px solid var(--border); border-radius:10px; padding:14px; min-height:200px; max-height:400px; overflow-y:auto; font-size:13px; color:var(--text); white-space:pre-wrap; line-height:1.8; font-family:inherit; }
+.prompt-box.empty { display:flex; align-items:center; justify-content:center; color:var(--text3); font-size:13px; min-height:200px; }
 .prompt-stats { display:flex; gap:16px; font-size:11px; color:var(--text3); margin-top:8px; }
+.prompt-edit { width:100%; background:rgba(0,0,0,0.3); border:1px solid var(--border); border-radius:10px; padding:14px; min-height:200px; font-size:13px; line-height:1.8; color:var(--text); resize:vertical; font-family:inherit; outline:none; }
+.prompt-edit:focus { border-color:rgba(124,58,237,0.5); box-shadow:0 0 0 3px rgba(124,58,237,0.08); }
+.prompt-placeholder { background:rgba(0,0,0,0.3); border:1px solid var(--border); border-radius:10px; padding:40px 14px; text-align:center; color:var(--text3); font-size:13px; min-height:200px; display:flex; align-items:center; justify-content:center; }
 
 /* === IMAGE DISPLAY === */
 .img-display { background:var(--surface); border:1px solid var(--border); border-radius:12px; overflow:hidden; }
